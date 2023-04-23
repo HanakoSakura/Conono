@@ -1,0 +1,28 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Conono Sample</title>
+    <script src="Conono.js"></script>
+</head>
+<body>
+    <!--It is best to use<textarea>tags here.-->
+    <textarea id="text" style="display:none">
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+Some `Test` things
+---
+Text
+**Bold**
+*Italic*
+</textarea>
+    <script>
+        var text = document.getElementById("text").innerText
+        var ret = Conono(text)
+        document.write(ret);
+    </script>
+</body>
+</html>
