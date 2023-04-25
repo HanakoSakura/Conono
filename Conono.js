@@ -95,6 +95,19 @@ function Conono(text) {
     var i = 0
     for (; i < buffer.length; i++) {
         TEXT = buffer[i]
+        // Quote
+        if (TEXT.search(/^> /) == 0) {
+            if (flag != 'QUOTE') {
+                ret += '<div class=\"Conono\" style=\"border-style: groove;border-width: 0px 0px 0px 5px;background-color: #E0E0E0;margin-left: inherit\">\n'
+                flag = 'QUOTE'
+            }
+            ret += '<p>' + Conono_InnerText(TEXT.slice(2)) + '</p>\n'
+            continue
+        }
+        if (flag == 'QUOTE') {
+            flag = ''
+            ret += '</div>'
+        }
         // Line?
         if (TEXT.search(/^---\s*$/)!=-1) {
             ret += '<hr>\n'
@@ -103,35 +116,35 @@ function Conono(text) {
         // HEADING?
         if (TEXT.search(/^# /) == 0) {
             SRH = TEXT.slice(2)
-            ret += '<h1>' + Conono_InnerText(SRH) + '</h1>'
+            ret += '<h1 class=\"Conono\">' + Conono_InnerText(SRH) + '</h1>'
             continue
         }
         if (TEXT.search(/^## /) == 0) {
             SRH = TEXT.slice(3)
-            ret += '<h2>' + Conono_InnerText(SRH) + '</h2>'
+            ret += '<h2 class=\"Conono\">' + Conono_InnerText(SRH) + '</h2>'
             continue
         }
         if (TEXT.search(/^### /) == 0) {
             SRH = TEXT.slice(4)
-            ret += '<h3>' + Conono_InnerText(SRH) + '</h3>'
+            ret += '<h3 class=\"Conono\">' + Conono_InnerText(SRH) + '</h3>'
             continue
         }
         if (TEXT.search(/^#### /) == 0) {
             SRH = TEXT.slice(5)
-            ret += '<h4>' + Conono_InnerText(SRH) + '</h4>'
+            ret += '<h4 class=\"Conono\">' + Conono_InnerText(SRH) + '</h4>'
             continue
         }
         if (TEXT.search(/^##### /) == 0) {
             SRH = TEXT.slice(6)
-            ret += '<h5>' + Conono_InnerText(SRH) + '</h5>'
+            ret += '<h5 class=\"Conono\">' + Conono_InnerText(SRH) + '</h5>'
             continue
         }
         if (TEXT.search(/^###### /) == 0) {
             SRH = TEXT.slice(7)
-            ret += '<h6>' + Conono_InnerText(SRH) + '</h6>'
+            ret += '<h6 class=\"Conono\">' + Conono_InnerText(SRH) + '</h6>'
             continue
         }
-        ret += '<p>' + Conono_InnerText(TEXT) + '</p>\n'
+        ret += '<p class=\"Conono\">' + Conono_InnerText(TEXT) + '</p>\n'
     }
     return ret
 }
